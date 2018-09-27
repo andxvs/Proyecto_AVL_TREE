@@ -11,7 +11,7 @@ IDIR = -I../include/
 SRCDIR = ../src/
 
 # SRC targets
-SRC = avl_tree
+SRC = avl_TREE
 
 # TEST directory
 TESTDIR = ../test/
