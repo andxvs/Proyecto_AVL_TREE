@@ -1,68 +1,71 @@
+// unittest.cpp - Andres Valverde Saborio - B37198
+
 #include<iostream>
-#include"avl_tree.h"
-#include<string>
+#include"../include/avl_TREE.h"
+
 
 using namespace std;
 
+// Se realizan 5 pruebas para ver diferentes funciones del programa
 
 // Unitest
-int main(
+int main()
 {
-//
-int pruebaCedulaGRANDE(string cedula)
-{
-  char* end;
-  uint32_t max_cedula = 999999999;
-  cout<<"Digite el valor de una cedula mayor a 999999999"<<endl;
-  getline(cin, cedula);
-  uint32_t id;
-  id = strtol(cedula.c_str(), &end, 10);
-  if( id > max_cedula)
-    return out_of_bonds;
-  else
-    return correcto;
-}
+  Nodo* nuevo = new Nodo; 
+  // Prueba 11, cedula con mas de 9 digitos
+  cout << "En esta prueba se introducira una cedula con mas de 9 digitos"<< endl;
+  cout << "La cedula ingresada es: 1000000000" << endl;
+  Verificacion_Cedula("10000000000");
+  cout << endl;
+  cout << endl;
 
-int pruebaCedulaNONUMERICA(string cedula)
-{
-  char prueba[100];
-  int tam = cedula.size();
-  for (int i = 0; tam > i; i++)
+  //PRUEBA 2: CEDULA CON MENOS DE 9 digitos
+  cout<< "En esta prueba se introducira una cedula con menos de 9 digitos" << endl;
+  cout << "La cedula ingresada es: 10000000" << endl;
+
+  Verificacion_Cedula("10000000");
+
+  cout << endl;
+  cout << endl;
+  //PRUEBA 3: NOMBRE NO valido
+  cout<< "En esta prueba se introducira un nombre invalido" << endl;
+  cout<< "EL nombre ingresado es: AND1000" << endl;
+  int res = Verificacion_Nombre("AND1000");
+  if(res == nombre_invalido)
   {
-    if(!isalpha(prueba[i]))
-    {
-      cout << "El nombre no posee un formato valido" << endl;
-      return error_paramtero;
-    }
+    cout << "El nombre es invalido. " << endl;
   }
-  cout<< "El nombre tiene un formato valido" << endl;
-  return correcto;
-}
+  cout << endl;
+  cout << endl;
 
-int pruebaCedulaNOVALIDA(string cedula)
-{
-  char* end;
-  string cedu;
-  uint32_t min_cedula = 100000000;
-  cout<<"Digite el valor de una cedula menor a 100000000"<<endl;
-  getline(cin, cedula);
-  uint32_t id;
-  id = strtol(cedula.c_str(), &end, 10);
-  if( id < min_cedula)
-    return out_of_bonds;
-  else
-    return correcto;
-}
+  //PRUEBA 4: NOMBRE VALIDO
+  cout<< "En esta prueba se introducira un nombre invalido" << endl;
+  cout<< "EL nombre ingresado es: AND1000" << endl;
+  int res = Verificacion_Nombre("ANDRES VALVERDE SABORIO");
+  if(res == parametro_correcto)
+  {
+    cout << "El nombre es valido. " << endl;
+  }
+  cout << endl;
+  cout << endl;
+  //Prueba 5: NODO NULO
+  cout<< "En esta prueba se introduce un nodo nulo al arbol." << endl;
+  // Se definen los valores del nodo
+  string nombre = "";
+  string id = "0";
 
-Nodo* insert_NodoNULO(Nodo* null_node)
-{
-  Nodo* nuevo = new Nodo;
-  nuevo -> lc = nullptr;
-  nuevo -> rc = nullptr;
-  nuevo -> haltura = 0;
-  nuevo -> padre = nullptr;
-  nuevo -> nombre = "";
-  nuevo -> cedula = 0;
+  nuevo->lc = nuevo->rc = nullptr;
+  nuevo->cedula = 0;
+  nuevo->nombre = "";
+  nuevo->haltura = 0;
 
-  return null_node;
+  nuevo = Insert_AVL(nombre, id, nuevo);
+  cout << "Se creo un nodo nulo:" << endl;
+  cout << "Cedula: "<< nuevo->cedula << endl;
+  cout << "Nombre: "<< nuevo->nombre << endl;
+  cout << "Altura: "<< nuevo->haltura << endl;
+
+  delete nuevo;
+  return 0;
+
 }
